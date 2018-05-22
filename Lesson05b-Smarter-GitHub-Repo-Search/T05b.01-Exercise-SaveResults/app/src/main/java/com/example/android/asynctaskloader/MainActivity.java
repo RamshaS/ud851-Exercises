@@ -32,10 +32,10 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    // TODO (1) Create a static final key to store the query's URL
-
-    // TODO (2) Create a static final key to store the search's raw JSON
-
+    // Completed (1) Create a static final key to store the query's URL
+public static final String Query_URL_KEY = "queryurl";
+    // Completed (2) Create a static final key to store the search's raw JSON
+public static final String Search_RAW_KEY = "searchrawjson";
     private EditText mSearchBoxEditText;
 
     private TextView mUrlDisplayTextView;
@@ -59,7 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
-        // TODO (9) If the savedInstanceState bundle is not null, set the text of the URL and search results TextView respectively
+        // Completed (9) If the savedInstanceState bundle is not null, set the text of the URL and search results TextView respectively
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(Query_URL_KEY)&& savedInstanceState.containsKey(Search_RAW_KEY)) {
+                mSearchBoxEditText.setText(savedInstanceState.getString(Query_URL_KEY));
+                mSearchResultsTextView.setText(savedInstanceState.getString(Search_RAW_KEY));
+            }
+        }
     }
 
     /**
@@ -152,6 +158,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO (3) Override onSaveInstanceState to persist data across Activity recreation
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String QueryURL =mSearchBoxEditText.getText().toString() ;
+        String SearchResult = mSearchResultsTextView.getText().toString();
+        outState.putString(Search_RAW_KEY,SearchResult);
+        outState.putString(Query_URL_KEY,QueryURL);
+    }
+
     // Do the following steps within onSaveInstanceState
     // TODO (4) Make sure super.onSaveInstanceState is called before doing anything else
 
