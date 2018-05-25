@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements
         /*
          * Initialize the loader
          */
-        getSupportLoaderManager().initLoader(GITHUB_SEARCH_LOADER, null, this);
+            getSupportLoaderManager().initLoader(GITHUB_SEARCH_LOADER, null, this);
     }
 
     /**
